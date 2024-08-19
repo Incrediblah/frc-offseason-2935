@@ -10,9 +10,11 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ConveyerConstants;
+import frc.robot.Constants.StatusVariables;
 
 
 public class ConveyerSubsystem extends SubsystemBase {
@@ -22,6 +24,8 @@ public class ConveyerSubsystem extends SubsystemBase {
 
   private CANSparkMax conveyer_motor = new CANSparkMax(ConveyerConstants.conveyerMotorCANId, MotorType.kBrushless); 
   private RelativeEncoder conveyer_encoder = conveyer_motor.getEncoder();
+
+  private DigitalInput conveyerSwitch1 = new DigitalInput(ConveyerConstants.switchOnePort); 
 
   /** Creates a new ConveyerSubsystem. */
   public ConveyerSubsystem() {
@@ -45,7 +49,8 @@ public class ConveyerSubsystem extends SubsystemBase {
  
      // PRINT MOTOR CURRENT USAGE 
      SmartDashboard.putNumber(CONVEYER_PREFIX + "conveyer current", getconveyer_EncoderCurrent()); 
-
+    //PRINT SENSOR OUTPUT
+     SmartDashboard.putBoolean("sensor one", getConveyerSwitchOneValue()); 
   }
 
       // SET TO BRAKE MODE 
@@ -75,6 +80,11 @@ public class ConveyerSubsystem extends SubsystemBase {
   public double getconveyer_EncoderCurrent(){
     return conveyer_motor.getOutputCurrent(); 
   }
+  
+  public boolean getConveyerSwitchOneValue(){
+    // StatusVariables.conveyerSwitchOneStatus = conveyerSwitch1.get();
+    return conveyerSwitch1.get(); 
+  }
 
   // SET conveyer 
   public void setconveyer(double conveyerSpeed){
@@ -99,7 +109,7 @@ public class ConveyerSubsystem extends SubsystemBase {
     conveyer_motor.getPIDController().setReference(0, ControlType.kVelocity); 
   }
 
-  public void setShooterPowerMode(){
+  public void setConveyerPowerMode(){
     conveyer_motor.getPIDController().setReference(0, ControlType.kCurrent); 
   }
 

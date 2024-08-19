@@ -10,6 +10,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import frc.robot.Constants.NeoMotorConstants;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -64,8 +65,8 @@ public final class Constants {
 
     public static final boolean kGyroReversed = false;
 
-    // SPEED LIMITERS 
-    public static final double driveSpeedLimiter = 0.25;
+    // SPEED PERCENTAGE
+    public static final double driveSpeedLimiter = 0.35;
 
   }
 
@@ -154,8 +155,10 @@ public final class Constants {
     public static final double conveyerSpeed = 0.5; // amps
 
     public static final int neoRPM = 5676; 
-
+    public static final int switchOnePort = 0; 
     public static final double conveyerVelocity = neoRPM * 0.75; 
+      // CONVEYER TIMEOUT DURATION 
+      public static final double conveyerCommandTimeOut = 3000; 
    
    
    // Conveyer
@@ -189,29 +192,29 @@ public final class Constants {
 
     public static final int neoVortexRPM = 6784; 
 
-    public static final double podiumTopSpeed = 1; 
-    public static final double podiumBottomSpeed = 0.5; 
+    public static final double podiumTopSpeed = -1; 
+    public static final double podiumBottomSpeed = -0.5; 
 
 
-    public static final double podiumTopVelocity = neoVortexRPM; 
-    public static final double podiumBottomVelocity = neoVortexRPM * 0.425; 
+    public static final double podiumTopVelocity = neoVortexRPM*-1; 
+    public static final double podiumBottomVelocity = neoVortexRPM * -0.35; 
 
-    public static final double subwooferTopVelocity = neoVortexRPM * 0.25; 
-    public static final double subwooferBottomVelocity = neoVortexRPM; 
-
-
-    public static final double autolineTopVelocity = neoVortexRPM * 0.8 ; 
-    public static final double autolineBottomVelocity = neoVortexRPM * 0.7; 
-
-    public static final double ampTopVelocity = neoVortexRPM * 0.10 ; 
-    public static final double ampBottomVelocity = neoVortexRPM * 1; 
+    public static final double subwooferTopVelocity = neoVortexRPM * -0.20; 
+    public static final double subwooferBottomVelocity = -neoVortexRPM; 
 
 
+    public static final double autolineTopVelocity = neoVortexRPM * -0.8 ; 
+    public static final double autolineBottomVelocity = neoVortexRPM * -0.5; 
+
+    public static final double ampTopVelocity = neoVortexRPM * -0.025 ; 
+    public static final double ampBottomVelocity = neoVortexRPM * -.85; 
 
 
 
-    public static final double shooterIntakeTopSpeed = -0.25; 
-    public static final double shooterIntakeBottomSpeed = -0.25; 
+
+
+    public static final double shooterIntakeTopSpeed = 0.25; 
+    public static final double shooterIntakeBottomSpeed = 0.25; 
 
     public static final double conveyerSpeed = -0.25; 
    
@@ -255,7 +258,7 @@ public final class Constants {
 
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
-    public static final double kDriveDeadband = 0.05;
+    public static final double kDriveDeadband = 0.1;
 
      // CONTROLLER PORTS 
      public static final int primaryControllerPort = 0; 
@@ -297,6 +300,11 @@ public final class Constants {
     // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
         kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+  }
+ public static class StatusVariables{
+   
+  public static boolean conveyerSwitchOneStatus;  
+    
   }
 
   public static final class NeoMotorConstants {

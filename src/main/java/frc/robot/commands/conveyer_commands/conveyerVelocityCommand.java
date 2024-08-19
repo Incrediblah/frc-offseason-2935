@@ -50,7 +50,7 @@ public class conveyerVelocityCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     CONVEYER_SUBSYSTEM.setCoastMode();
-    CONVEYER_SUBSYSTEM.setShooterPowerMode();
+    CONVEYER_SUBSYSTEM.setConveyerPowerMode();
     CONVEYER_SUBSYSTEM.setConveyer(0);
   }
 
